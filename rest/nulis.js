@@ -1,4 +1,5 @@
 const path = require('path');
+const { readFileSync } = require('fs');
 const { spawn } = require('child_process');
 
 function _nulis(name, teks) {
