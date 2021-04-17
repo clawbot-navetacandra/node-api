@@ -1,0 +1,30 @@
+<<<<<<< HEAD
+{
+    "id": "id",
+    "en": "en",
+    "ja": "ja",
+    "ko": "ko",
+    "indonesia": "id",
+    "english": "en",
+    "inggris": "en",
+    "indonesian": "id",
+    "jepang": "ja",
+    "japan": "ja",
+    "korea": "ko",
+    "korean": "ko"
+=======
+{
+    "id": "id",
+    "en": "en",
+    "ja": "ja",
+    "ko": "ko",
+    "indonesia": "id",
+    "english": "en",
+    "inggris": "en",
+    "indonesian": "id",
+    "jepang": "ja",
+    "japan": "ja",
+    "korea": "ko",
+    "korean": "ko"
+>>>>>>> 89fb1e1 (add translate cache)
+}
