@@ -2,8 +2,8 @@ let { spawn } = require('child_process');
 let path = require('path')
 const { readFileSync } = require('fs');
 
+let d = new Date
 function nulis(teks, name) {
-    let d = new Date
     let fontPath = 'src/Zahraaa.ttf'
     let inputPath = 'src/nulis.jpg'
     let outputPath = 'tmp/hasil-' + name + '.jpg'
@@ -53,7 +53,7 @@ let handler = function (app) {
     app.get('/nulis', function (req, res) {
         let q = req.query
         let text = decodeURIComponent(q['text'] || q['teks'] || '')
-        let name = decodeURIComponent(q['name'] || q['nama'] || '')
+        let name = d.getTime()
         let hasilPath = path.resolve(`${__dirname}/tmp/hasil-${name}.jpg`)
 	
 	

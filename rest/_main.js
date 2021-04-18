@@ -22,7 +22,7 @@ function handler(app) {
     _gtranslate(app);
     _jadwalsholat(app);
     _kbbi(app);
-    _nulis(app);
+    // _nulis(app);
     _ssweb(app);
     _tinyurl(app);
     _ttp(app);
