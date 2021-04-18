@@ -1,12 +1,12 @@
-const path = require('path');
+let { spawn } = require('child_process');
+let path = require('path')
 const { readFileSync } = require('fs');
-const { spawn } = require('child_process');
 
-function _nulis(name, teks) {
-    let d = new Date()
-    let fontPath = '../src/Zahraaa.ttf'
-    let inputPath = '../src/nulis.jpg'
-    let outputPath = '../src/hasil-' + name + '.jpg'
+function nulis(teks, name) {
+    let d = new Date
+    let fontPath = 'src/Zahraaa.ttf'
+    let inputPath = 'src/nulis.jpg'
+    let outputPath = 'tmp/hasil-' + name + '.jpg'
     let tgl = d.toLocaleDateString('id-Id')
     let hari = d.toLocaleDateString('id-Id', { weekday: 'long' })
     return spawn('convert', [
@@ -46,20 +46,25 @@ function _nulis(name, teks) {
         teks,
         outputPath
     ]);
-}
+};
 
-function nulis(app) {
-    app.get('/nulis', async function (req, res) {
-        let q = req.query;
-        let teks = decodeURIComponent(q['teks'] || q['text'] || '');
-        let name = new Date().getTime();
-        let hasilPath = path.resolve(`${__dirname}/../src/hasil-${name}.jpg`)
-        _nulis(name, teks)
-            .on('error', (err) => res.json({
-                status: 'error',
-                message: 'internal server error',
-                error: err
-            }))
+let handler = function (app) {
+
+    app.get('/nulis', function (req, res) {
+        let q = req.query
+        let text = decodeURIComponent(q['text'] || q['teks'] || '')
+        let name = decodeURIComponent(q['name'] || q['nama'] || '')
+        let hasilPath = path.resolve(`${__dirname}/tmp/hasil-${name}.jpg`)
+	
+	
+        nulis(text, name)
+            .on('error', e => {
+                res.status(503);
+                res.json({
+                    status: "error",
+                    message: 'Internal server error'
+                })
+            })
             .on('exit', () => {
                 res.status(200)
                 let hasil = readFileSync(hasilPath, 'base64');
@@ -71,8 +76,9 @@ function nulis(app) {
                         data: hasil
                     }
                 })
-            });
+            })
     })
+
 }
 
-module.exports = nulis
+module.exports = handler
