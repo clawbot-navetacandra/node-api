@@ -104,7 +104,7 @@ setInterval(async () => {
     try {
         await rp(`http://${process.env.LOCAL_URL}/anti-idling-api-heroku`)
     } catch (err) {
-        retur
+        return
     }
 }, 60000);
 
